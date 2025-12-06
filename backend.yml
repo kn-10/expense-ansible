@@ -42,11 +42,11 @@
       community.general.npm:
         path: /app
 
-    - name: Start Backend Service
+    - name: Start MySql Service
       ansible.builtin.systemd_service:
-          name: backend
-          state: restarted
-          enabled: yes
+        name: backend
+        enabled: true
+        state: restarted
 
     - name: Install MySql Client
       ansible.builtin.dnf:
@@ -65,8 +65,6 @@
         target: /app/schema/backend.sql
         login_user: root
         login_password: ExpenseApp@1
-
-
 
 
 

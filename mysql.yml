@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: Disable mysql default version
-      ansible.builtin.shell: dnf module disable mysql
+      ansible.builtin.shell: dnf module disable mysql -y
 
     - name: Copying MySql Repo File
       ansible.builtin.copy:

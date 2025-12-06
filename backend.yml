@@ -3,10 +3,10 @@
   become: true
   tasks:
     - name: Disable Default Version of NodeJS
-      ansible.builtin.shell: module disable nodejs -y
+      ansible.builtin.shell: dnf module disable nodejs -y
 
     - name: Enable NodeJS18 Version
-      ansible.builtin.shell: module enable nodejs:18 -y
+      ansible.builtin.shell: dnf module enable nodejs:18 -y
 
     - name: Install NodeJS
       ansible.builtin.dnf:

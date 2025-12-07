@@ -1,4 +1,4 @@
-tasks:
+
   - name: Install the latest version of Nginx
     ansible.builtin.dnf:
       name: nginx

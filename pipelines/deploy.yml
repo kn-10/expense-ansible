@@ -3,26 +3,24 @@ pipelines:
   deploy:
     group: defaultGroup
     label_template: ${COUNT}
-    lock_behavior: none
+    lock_behavior: true
     display_order: -1
     materials:
-      git-c6c30de:
+      ansible:
         git: https://github.com/kn-10/expense-ansible.git
         shallow_clone: false
         auto_update: true
         branch: main
     stages:
-      - test-stage:
+      - DEV:
           fetch_materials: true
-          keep_artifacts: false
           clean_workspace: false
           approval:
-            type: success
-            allow_only_on_success: false
+            type: manual
           jobs:
-            test-job:
+            deployment:
               timeout: 0
               tasks:
                 - exec:
-                    command: ls
+                    command: ls -l
                     run_if: passed

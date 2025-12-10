@@ -23,7 +23,7 @@ pipelines:
               tasks:
                 - exec:
                     command: ansible-playbook
-                    arguments: ["-i", "mysl-dev.kdevops.online,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=mysql", "-e", "env=dev", "expense.yml"]
+                    arguments: ["-i", "mysql-dev.kdevops.online,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=mysql", "-e", "env=dev", "expense.yml"]
 
 
       - QA:

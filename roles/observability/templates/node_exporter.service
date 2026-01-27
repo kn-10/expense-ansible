@@ -6,3 +6,4 @@ ExecStart=/opt/node_exporter-{{node_exporter_version}}.linux-amd64/node_exporter
 
 [Install]
 WantedBy=multi-user.target
+

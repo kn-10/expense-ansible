@@ -34,14 +34,10 @@
   community.general.npm:
     path: /app
 
-
-
 - name: Install New Relic
   shell: npm install newrelic --save
   args:
     chdir: /app
-
-
 
 - name: Configure backend service
   template:

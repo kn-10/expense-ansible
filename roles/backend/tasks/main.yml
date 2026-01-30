@@ -33,15 +33,15 @@
 - name: Install app dependencies
   community.general.npm:
     path: /app
-  become: yes
-  become_user: expense
+
+
 
 - name: Install New Relic
   shell: npm install newrelic --save
   args:
     chdir: /app
-  become: yes
-  become_user: expense
+
+
 
 - name: Configure backend service
   template:

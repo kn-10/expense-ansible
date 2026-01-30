@@ -1,50 +1,55 @@
-- name: Disable Default Version of NodeJS
-  ansible.builtin.shell: dnf module disable nodejs -y
+- name: Reset NodeJS module
+  shell: dnf module reset nodejs -y
 
-- name: Enable NodeJS20 Version
-  ansible.builtin.shell: dnf module enable nodejs:20 -y
+- name: Enable NodeJS 20
+  shell: dnf module enable nodejs:20 -y
 
 - name: Install NodeJS
-  ansible.builtin.dnf:
+  dnf:
     name: nodejs
     state: installed
 
 - name: Verify NodeJS version
-  ansible.builtin.command: node -v
+  command: node -v
   register: node_version
 
 - debug:
     msg: "Node version is {{ node_version.stdout }}"
 
-- name: Configure Backend Service
-  ansible.builtin.template:
-    src: backend.service
-    dest: /etc/systemd/system/backend.service
-
-- name: Adding Application User
-  ansible.builtin.user:
+- name: Add application user
+  user:
     name: expense
 
-- name: App Prerequisites
-  ansible.builtin.include_role:
+- name: App prerequisites
+  include_role:
     name: common
     tasks_from: app_prereq
 
-- name: Downloading Application Dependencies
+- name: Install app dependencies
   community.general.npm:
     path: /app
+  become: yes
+  become_user: expense
 
-- name: Installing New Relic npm dependency
-  ansible.builtin.shell: npm install newrelic --save
+- name: Install New Relic
+  shell: npm install newrelic --save
   args:
     chdir: /app
+  become: yes
+  become_user: expense
 
-- name: Reloading SystemD and Start Backend Service
-  ansible.builtin.systemd_service:
+- name: Configure backend service
+  template:
+    src: backend.service
+    dest: /etc/systemd/system/backend.service
+
+- name: Reload systemd and start backend
+  systemd_service:
     name: backend
     state: restarted
     enabled: yes
     daemon-reload: yes
+
 
 - name: Install MySql & Python Library for MySql
   ansible.builtin.dnf:

@@ -1,6 +1,11 @@
 - name: Reset NodeJS module
   shell: dnf module reset nodejs -y
 
+- name: Remove existing NodeJS
+  dnf:
+    name: nodejs
+    state: absent
+
 - name: Enable NodeJS 20
   shell: dnf module enable nodejs:20 -y
 

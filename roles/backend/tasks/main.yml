@@ -9,6 +9,13 @@
     name: nodejs
     state: installed
 
+- name: Verify NodeJS version
+  ansible.builtin.command: node -v
+  register: node_version
+
+- debug:
+    msg: "Node version is {{ node_version.stdout }}"
+
 - name: Configure Backend Service
   ansible.builtin.template:
     src: backend.service

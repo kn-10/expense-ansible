@@ -20,7 +20,7 @@
     daemon-reload: yes
 
 - name: Copy Elasticsearch Repository File
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 

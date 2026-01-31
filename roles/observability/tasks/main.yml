@@ -22,7 +22,7 @@
 - name: Copy Elasticsearch Repository File
   ansible.builtin.copy:
     src: elasticsearch.repo
-    dest: /etc/yum.repos.d/elasticsearch.repo
+    dest: /etc/yum.repos.d/elastic.repo
 
 - name: Install Filebeat on Frontend and Backend Servers
   ansible.builtin.dnf:

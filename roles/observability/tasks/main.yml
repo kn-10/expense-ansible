@@ -18,3 +18,25 @@
     state: restarted
     enabled: yes
     daemon-reload: yes
+
+- name: Copy Elasticsearch Repository File
+  ansible.builtin.copy:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+
+- name: Install Filebeat on Frontend and Backend Servers
+  ansible.builtin.dnf:
+    name: filebeat
+    state: installed
+
+- name: Filebeat Configuration Update
+  ansible.builtin.template:
+    src: filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
+
+- name: Enable and Start Filebeat Service
+  ansible.builtin.systemd_service:
+    name: filebeat
+    state: restarted
+    enabled: true
+

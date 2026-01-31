@@ -1,2 +1,1 @@
 node_exporter_version: 1.10.2
-logfile_path: /var/log/nginx/access.log

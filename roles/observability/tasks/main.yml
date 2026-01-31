@@ -24,7 +24,7 @@
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
-- name: Install Filebeat on Frontend and Backend Servers
+- name: Install Filebeat on {{component}} Server
   ansible.builtin.dnf:
     name: filebeat
     state: installed
